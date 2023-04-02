@@ -6,12 +6,12 @@ pub trait NatAdd<Rhs: Nat + ?Sized>: Nat {
     type Result: Nat + ?Sized;
 }
 
-/// X + 0 => X
+/// `X + 0 => X`
 impl<X: ?Sized + Nat> NatAdd<NZ> for X {
     type Result = X;
 }
 
-/// A + (B +1) => (A + B) +1
+/// `A + (B +1) => (A + B) +1`
 impl<A: Nat + ?Sized, B: Nat + ?Sized> NatAdd<NS<B>> for A
 where
     A: NatAdd<B>,

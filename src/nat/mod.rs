@@ -10,4 +10,4 @@ mod sw0;
 pub mod nums;
 pub mod pan;
 
-pub use self::{add::*, def::*, div::*, mul::*, sub::*, sw0::*, psub::*};
+pub use self::{add::*, def::*, div::*, mul::*, psub::*, sub::*, sw0::*};

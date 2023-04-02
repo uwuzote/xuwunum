@@ -1,27 +1,27 @@
-use super::{NatPan, NW, NP};
+use super::{NatPan, NP, NW};
 use crate::nat::Nat;
 
 pub type NSwP<Expr, BrP, BrW> = <Expr as NatSwP<BrP, BrW>>::Result;
 
 pub trait NatSwP<BrP: Nat + ?Sized, BrW: Nat + ?Sized>: NatPan {
-	type Result: Nat + ?Sized;
+    type Result: Nat + ?Sized;
 }
 
 /// `! !? A : B => A`
 impl<A: Nat + ?Sized, B: Nat + ?Sized> NatSwP<A, B> for NP {
-	type Result = A;
+    type Result = A;
 }
 
 /// `@(X) !? A : B => B`
 impl<X: Nat + ?Sized, A: Nat + ?Sized, B: Nat + ?Sized> NatSwP<A, B> for NW<X> {
-	type Result = B;
+    type Result = B;
 }
 
 #[cfg(test)]
 mod tests {
-	use super::NSwP;
+    use super::NSwP;
     use crate::nat::nums::*;
-	use crate::nat::pan::{NP, NW};
+    use crate::nat::pan::{NP, NW};
     use crate::runtime::rt;
 
     macro_rules! case {
@@ -39,7 +39,7 @@ mod tests {
 
     #[test]
     fn nswp() {
-		case!(NP, N100, N200, usize);
+        case!(NP, N100, N200, usize);
         case!(NW<N0>, N100, N200, i16);
         case!(NW<N1>, N100, N200, i128);
         case!(NW<N9>, N100, N200, u64);
